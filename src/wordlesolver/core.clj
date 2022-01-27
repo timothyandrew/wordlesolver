@@ -1,6 +1,7 @@
 (ns wordlesolver.core
   (:gen-class)
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [clojure.java.io :as io]))
 
 (defn cull-words [candidate words pattern]
   (let [preds
@@ -26,8 +27,8 @@
 
 (defn -main
   []
-  (println "HELLo")
-  (let [words (-> "/Users/tim/wordlist"
+  (let [words (-> "wordlist"
+                  io/resource
                   slurp
                   (str/split #"\n"))
         words (filter #(= (count %) 5) words)
